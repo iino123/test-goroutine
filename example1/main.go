@@ -33,7 +33,7 @@ func main() {
 		// time.Sleep(5 * time.Second) NOTE: ここでブロックしてしまうとメインのgo-routineをブロックしてしまうので、要件を満たせない
 		// go checkLink(l, c)
 
-		// TODO: これでは不具合になる
+		// TODO: これでは不具合になる、変数lがなんかおかしくなる
 		// fanction literal (jsで言うところの、無名関数の即時実行)
 		// go func() {
 		// 	time.Sleep(5 * time.Second)
