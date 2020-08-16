@@ -20,10 +20,16 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	for {
-		// 第一引数に <-c があることで、channelからのメッセージを受け取るまで処理がブロックされている。
-		// TODO: このgoキーワードを無くした時の挙動について
-		go checkLink(<-c, c)
+	// for {
+	// 	// 第一引数に <-c があることで、channelからのメッセージを受け取るまで処理がブロックされている。
+	// 	// TODO: このgoキーワードを無くした時の挙動について
+	// 	go checkLink(<-c, c)
+	// }
+
+	// 上記に同じ意味合いになる
+	// range <channel>とする書き方
+	for l := range c {
+		go checkLink(l, c)
 	}
 }
 
