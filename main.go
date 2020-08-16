@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -29,7 +30,21 @@ func main() {
 	// 上記に同じ意味合いになる
 	// range <channel>とする書き方
 	for l := range c {
-		go checkLink(l, c)
+		// time.Sleep(5 * time.Second) NOTE: ここでブロックしてしまうとメインのgo-routineをブロックしてしまうので、要件を満たせない
+		// go checkLink(l, c)
+
+		// TODO: これでは不具合になる
+		// fanction literal (jsで言うところの、無名関数の即時実行)
+		// go func() {
+		// 	time.Sleep(5 * time.Second)
+		// 	checkLink(l, c)
+		// }()
+
+		go func(link string) {
+			time.Sleep(5 * time.Second)
+			checkLink(link, c)
+		}(l)
+
 	}
 }
 
